@@ -1,8 +1,6 @@
 ﻿using Microsoft.Playwright;
 using NUnit.Framework;
-using OpenAI_API;
 using playwrightBDD.Setup;
-using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
 namespace playwrightBDD.StepDefinitions
@@ -11,6 +9,13 @@ namespace playwrightBDD.StepDefinitions
     public class MyFeature : BaseStepDefinition
     {
         private readonly IPage _Page;
+
+        // Use below when you want to interact with one element xpath
+        public ILocator MicrosoftLogo => _Page.Locator("//a[@id=\"uhfLogo\"]");
+
+        // use below when you want to interact with list of elements returned from xpath, make sure to use await, check the reference for more info
+        public Task<IReadOnlyList<IElementHandle>> GetAllHeaderButtons => _Page.QuerySelectorAllAsync("//ul[@class='js-paddle-items']/li");
+
         public MyFeature(Hooks hooks)
         {
             _Page = hooks.currentPage;
@@ -20,6 +25,29 @@ namespace playwrightBDD.StepDefinitions
         public async Task GivenINavigateToTheWebsite()
         {
             await _Page.GotoAsync("https://www.microsoft.com/");
+        }
+
+        [When(@"I Get all the menu buttons from header and click a random button")]
+        public async Task WhenIGetAllTheMenuButtonsFromHeader()
+        {
+            // use await as shown below to call list of elements.
+            var AllHeaderButtons = await GetAllHeaderButtons;
+            var randomNumber = CommonUtil.GetARandomNumberWithinRange(1, AllHeaderButtons.Count-2);
+
+            // once you get the random number use it to click on a random element in a list.
+            await AllHeaderButtons[randomNumber].ClickAsync();
+        }
+
+        [Then(@"I Navigate back to home page")]
+        public async Task ThenINavigateBackToHomePage()
+        {
+            await _Page.GoBackAsync();
+        }
+
+        [Then(@"I click on Microsoft logo")]
+        public async Task ThenIClickOnMicrosoftLogo()
+        {
+            await MicrosoftLogo.ClickAsync();
         }
 
         [When("I click the (.*) link")]

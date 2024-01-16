@@ -33,5 +33,11 @@ namespace playwrightBDD.Setup
                 return _config;
             }
         }
+
+        private static readonly Random random = new();
+        public static int GetARandomNumberWithinRange(int start, int end)
+        {
+            return random.Next(start, end + 1);
+        }
     }
 }
