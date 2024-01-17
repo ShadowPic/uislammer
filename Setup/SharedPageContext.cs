@@ -20,8 +20,7 @@ namespace playwrightBDD.Setup
             {
                 Headless = Config.HEADLESS,
                 Args = new string[] { "--start-maximized" },
-                Channel = Config.CHANNEL,
-
+               
             });
 
             //Setup a browser context
