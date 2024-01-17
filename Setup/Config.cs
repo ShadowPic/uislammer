@@ -6,5 +6,7 @@ namespace playwrightBDD.Setup
     {
         public static bool HEADLESS = Convert.ToBoolean(CommonUtil.GetAValueFromAppSettings("Playwright:LaunchOptions:Headless"));
         public static bool ENVIRONMENT = Convert.ToBoolean(CommonUtil.GetAValueFromAppSettings("Playwright:LaunchOptions:Headless"));
-    }
+        public static bool TakeScreenshot = Convert.ToBoolean(CommonUtil.GetAValueFromAppSettings("appsettings.TakeScreenshot"));
+    } 
 }
+
