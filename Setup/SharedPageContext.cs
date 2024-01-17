@@ -1,4 +1,4 @@
-﻿    using PlaywrightTestsCsNunit.Constants;
+﻿using Microsoft.Playwright;
 
 namespace playwrightBDD.Setup
 {
@@ -14,29 +14,21 @@ namespace playwrightBDD.Setup
 
         public async Task<IPage> CreateNewPlaywrightPage(string scenarioTitle)
         {
-            scenarioVideoFolderPath = $"./TestOutput_{RunConstants.ENVIRONMENT}_env/videos/{scenarioTitle.ToString().Replace(" ", "")}/";
-            var playwright = await Playwright.CreateAsync();
-
+             var playwright = await Playwright.CreateAsync();
             
             browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = RunConstants.HEADLESS,
+                Headless = Config.HEADLESS,
                 Args = new string[] { "--start-maximized" },
-                Channel = CommonUtil.WhichBrowserToRun(),
+                Channel = Config.CHANNEL,
 
             });
 
             //Setup a browser context
-            browserContext = await browser.NewContextAsync(new()
-            {
-                ViewportSize = BrowserConstants.StandardViewPortSize,
-                //ViewportSize = ViewportSize.NoViewport
-                //RecordVideoDir = scenarioVideoFolderPath,
+            browserContext = await browser.NewContextAsync(new());
 
-            });
-            //Initialise a page on the browser context.
-            PlaywrightPage = await browserContext.NewPageAsync();
-            await PlaywrightPage.SetViewportSizeAsync(1920, 945);
+            //Initialize a page on the browser context.
+            PlaywrightPage = await browserContext.NewPageAsync();            
             return PlaywrightPage;
         }
 
