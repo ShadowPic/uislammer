@@ -20,4 +20,8 @@
 			<Channel>chrome</Channel>
 		</LaunchOptions>
 	</Playwright>
+
+	<TestRunParameters>
+		<Parameter name ="environment" value ="#{TEST_ENVIRONMENT_TARGET}#"/>
+	</TestRunParameters>
 </RunSettings>
