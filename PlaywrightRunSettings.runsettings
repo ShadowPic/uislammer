@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
-	<!-- NUnit adapter -->
+	
+  <!-- NUnit adapter -->
 	<NUnit>
-		<NumberOfTestWorkers>24</NumberOfTestWorkers>
+		<NumberOfTestWorkers>5</NumberOfTestWorkers>
 	</NUnit>
-	<!-- General run configuration -->
+	
+  <!-- General run configuration -->
 	<RunConfiguration>
 		<EnvironmentVariables>
 			<!-- For debugging selectors, it's recommend to set the following environment variable -->
-			<DEBUG>pw:api</DEBUG>
+			<!--DEBUG>pw:api</DEBUG> -->
 		</EnvironmentVariables>
 	</RunConfiguration>
-	<!-- Playwright -->
+
+  <!-- Playwright -->
 	<Playwright>
 		<BrowserName>chromium</BrowserName>
 		<ExpectTimeout>5000</ExpectTimeout>
@@ -22,6 +25,9 @@
 	</Playwright>
 
 	<TestRunParameters>
-		<Parameter name ="environment" value ="#{TEST_ENVIRONMENT_TARGET}#"/>
-	</TestRunParameters>
+		<!-- The below value should come from pipeline or when running locally can be updated manually -->
+    <!-- <Parameter name ="environment" value ="#{TEST_ENVIRONMENT_TARGET}#"/> -->
+    <Parameter name ="environment" value ="test"/>
+
+  </TestRunParameters>
 </RunSettings>

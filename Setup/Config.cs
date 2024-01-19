@@ -1,12 +1,13 @@
 ﻿using Microsoft.Playwright;
+using NUnit.Framework;
 
 namespace playwrightBDD.Setup
 {
     public class Config
     {
-        public static bool HEADLESS = Convert.ToBoolean(CommonUtil.GetAValueFromAppSettings("Playwright:LaunchOptions:Headless"));
-        public static string ENVIRONMENT = CommonUtil.GetAValueFromAppSettings("environment");
-        public static bool TakeScreenshot = Convert.ToBoolean(CommonUtil.GetAValueFromAppSettings("TakeScreenshot"));
+        public static readonly string ENVIRONMENT = TestContext.Parameters["environment"]!;
+        public static readonly bool HEADLESS = Convert.ToBoolean(CommonUtility.GetAValueFromAppSettings("Playwright:LaunchOptions:Headless"));
+        public static readonly bool TakeScreenShot = Convert.ToBoolean(CommonUtility.GetAValueFromAppSettings("Settings:TakeScreenShot"));
     } 
 }
 

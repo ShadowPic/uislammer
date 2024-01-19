@@ -1,24 +1,27 @@
-﻿using Microsoft.Playwright;
-using NUnit.Framework;
+﻿using FluentAssertions;
+using Microsoft.Playwright;
 using playwrightBDD.Setup;
 using TechTalk.SpecFlow;
 
 namespace playwrightBDD.StepDefinitions
 {
     [Binding]
-    public class MyFeature : BaseStepDefinition
+    public class MyFeature 
     {
-        private readonly IPage _Page;
+        //private readonly ScenarioContext _scenarioContext;
+        public IPage _Page = null!;
+
 
         // Use below when you want to interact with one element xpath
-        public ILocator MicrosoftLogo => _Page.Locator("//a[@id=\"uhfLogo\"]");
+        public ILocator MicrosoftLogo => _Page.Locator("//img[@itemprop='logo']");
 
         // use below when you want to interact with list of elements returned from xpath, make sure to use await, check the reference for more info
         public Task<IReadOnlyList<IElementHandle>> GetAllHeaderButtons => _Page.QuerySelectorAllAsync("//ul[@class='js-paddle-items']/li");
 
+
         public MyFeature(Hooks hooks)
         {
-            _Page = hooks.currentPage;
+            _Page = hooks._PlaywrightPage;
         }
 
         [Given("I navigate to the website")]
@@ -32,7 +35,7 @@ namespace playwrightBDD.StepDefinitions
         {
             // use await as shown below to call list of elements.
             var AllHeaderButtons = await GetAllHeaderButtons;
-            var randomNumber = CommonUtil.GetARandomNumberWithinRange(1, AllHeaderButtons.Count-2);
+            var randomNumber = CommonUtility.GetARandomNumberWithinRange(1, AllHeaderButtons.Count-2);
 
             // once you get the random number use it to click on a random element in a list.
             await AllHeaderButtons[randomNumber].ClickAsync();
@@ -61,7 +64,8 @@ namespace playwrightBDD.StepDefinitions
         {
             var title = await _Page.TitleAsync();
             bool isEqual = expectedTitle.Contains(title);
-            Assert.True(isEqual);
+            isEqual.Should().BeTrue();
+
         }
     }
 
