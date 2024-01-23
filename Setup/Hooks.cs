@@ -1,7 +1,5 @@
 ﻿using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestPlatform.Common;
 using NUnit.Framework;
-using System.Text;
 using TechTalk.SpecFlow;
 
 [assembly: Parallelizable(ParallelScope.Fixtures)]
@@ -9,41 +7,37 @@ using TechTalk.SpecFlow;
 namespace playwrightBDD.Setup
 {
     [Binding]
-    public sealed class Hooks :BaseStepDefinition
+    public class Hooks 
     {
-        private readonly ScenarioContext _scenarioContext;
-        public IPage _Page;
-        public IPage CurrentPage { get { return _Page; } }
+        public IPage _PlaywrightPage = null!;
 
-        SharedPageContext sharedPageContext = new();
-        public IPage currentPage { get { return base.PlaywrightPage; } }
-        [BeforeScenario]
-        public async Task RegisterSingleInstancePractitioner()
+        private readonly ScenarioContext _scenarioContext;
+
+        public Hooks(ScenarioContext scenarioContext)
         {
-            base.CleanupPlaywright();
-            await base.InitializePlaywright();
+            _scenarioContext = scenarioContext;
+        } 
+
+        [BeforeScenario]
+        public async Task GetPlaywrightInstance()
+        {
+            _PlaywrightPage = await PlaywrightBase.InitializePlaywright();
         }
 
 
         /// <summary>
-        /// 1) Takes screenshot if there is a failure in any SpecFlow scenario 
-        /// 2) Screenshots are stored in ProjectFolder\bin\Debug\net7.0\TestOutput\Screenshots
+        /// 1) Takes screen shot if there is a failure in any SpecFlow scenario 
+        /// 2) Screen shots are stored in ProjectFolder\bin\Debug\net7.0\TestOutput\Screenshots
         /// </summary>
         /// <returns></returns>
         [AfterScenario]
         public async Task TearDown()
         {
-            if (Config.TakeScreenshot == true || _scenarioContext.ScenarioExecutionStatus.ToString().Equals("TestError"))
+            if (Config.TakeScreenShot == true || _scenarioContext.ScenarioExecutionStatus.ToString().Equals("TestError"))
             {
-                string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss");
-
-                await _Page.ScreenshotAsync(new()
-                {
-                    Path = $"TestOutput_{Config.ENVIRONMENT}_env/Screenshots/" + "_" + _scenarioContext.ScenarioInfo.Title + "_" + currentDateTime + ".jpg",
-                    FullPage = true,
-                });
+                 await PlaywrightBase.TakeScreenShot(_PlaywrightPage, _scenarioContext.ScenarioInfo.Title);
             }
-            await sharedPageContext.DestroyPlaywrightPage();
+            await PlaywrightBase.CleanupPlaywright(_PlaywrightPage);
 
         }
 

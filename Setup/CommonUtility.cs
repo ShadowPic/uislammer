@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
 namespace playwrightBDD.Setup
 {
-    public class CommonUtil
+    public class CommonUtility
     {
         static IConfiguration? _config;
 
@@ -28,9 +29,9 @@ namespace playwrightBDD.Setup
                 {
                     var builder = new ConfigurationBuilder()
                         .AddJsonFile("appsettings.json", false, true)
-                        .AddJsonFile($"appsettings.{Config.ENVIRONMENT}.json", false, true)
                         .AddJsonFile("appsettings.local.json", false, true)
-                        .AddXmlFile("PlaywrightBDDRunSettings.runsettings", false, true);
+                        .AddJsonFile($"appsettings.{Config.ENVIRONMENT}.json", false, true)
+                        .AddXmlFile("PlaywrightRunSettings.runsettings", false, true);
                     _config = builder.Build();
                 }
 
@@ -73,16 +74,16 @@ namespace playwrightBDD.Setup
         }
 
         // This function will return the string after removing all the special characters
-        public static string RemoveSpecialCharacters(string inputStringWithSplChar)
+        public static string RemoveSpecialCharacters(string inputStringWithSpecialChar)
         {
             // Define a regular expression pattern for special characters
             string pattern = "[^a-zA-Z0-9]";
 
             // Create a Regex object
-            Regex regex = new Regex(pattern);
+            Regex regex = new (pattern);
 
             // Use the Regex.Replace method to remove special characters
-            string result = regex.Replace(inputStringWithSplChar, "");
+            string result = regex.Replace(inputStringWithSpecialChar, "");
 
             return result;
         }
@@ -96,5 +97,7 @@ namespace playwrightBDD.Setup
             // convert string json into a JToken for the given property and return
             return JObject.Parse(json)[PropertyName]!;
         }
+
+
     }
 }
