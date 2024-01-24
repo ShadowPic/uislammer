@@ -49,7 +49,7 @@ namespace playwright.Helpers
 
         public void ExampleSQLTest()
         {
-            String sqlQuery = "SELECT TOP (10) * FROM [dbo].[Account]";
+            String sqlQuery = "SELECT * FROM Account";
             var queryResults = ExecuteQuery(sqlQuery);
         }
     }
