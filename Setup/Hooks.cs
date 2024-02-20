@@ -27,7 +27,7 @@ namespace playwrightBDD.Setup
 
         /// <summary>
         /// 1) Takes screen shot if there is a failure in any SpecFlow scenario 
-        /// 2) Screen shots are stored in ProjectFolder\bin\Debug\net7.0\TestOutput\Screenshots
+        /// 2) Screen shots are stored in ProjectFolder\bin\Debug\net8.0\TestOutput\Screenshots
         /// </summary>
         /// <returns></returns>
         [AfterScenario]
