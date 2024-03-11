@@ -1,24 +1,27 @@
 ﻿
 
 using Microsoft.Playwright;
+using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
+using playwright.Pages;
 
 namespace playwright.NUnitTests.Tests
 {
-    internal class NUnitBase
+    [Parallelizable(ParallelScope.Self)]
+    public class NUnitBase
     {
-        public IPage PlaywrightPage = null!;
+        public IPage Page;
 
         [SetUp]
         public async Task BeforeTest()
         {
-            PlaywrightPage = await PlaywrightBase.InitializePlaywright();
+            Page = await PlaywrightBase.InitializePlaywright();
         }
 
         [TearDown]
         public async Task AfterTest()
         {
-            await PlaywrightBase.CleanupPlaywright(PlaywrightPage);
+            await PlaywrightBase.CleanupPlaywright(Page);
         }
 
 

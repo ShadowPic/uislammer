@@ -1,12 +1,10 @@
 ﻿using Microsoft.Playwright;
+using NUnit.Framework;
 using playwrightBDD.Setup;
 
 
 public class PlaywrightBase
 {
-    public IBrowser browser = null!;
-    public IBrowserContext browserContext = null!;
-    public IPage PlaywrightPage = null!;
 
     public static async Task<IPage> InitializePlaywright()
     {
@@ -30,6 +28,7 @@ public class PlaywrightBase
         await PlaywrightPage.CloseAsync();
     }
 
+
     public static async Task TakeScreenShot(IPage PlaywrightPage,string title)
     {
         string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss");
@@ -40,4 +39,32 @@ public class PlaywrightBase
             FullPage = true,
         });
     }
+
+    public static async Task StartTracing(IBrowserContext browserContext, string testName)
+    {
+        await browserContext.Tracing.StartAsync(new()
+        {
+            Title = testName,
+            Screenshots = true,
+            Snapshots = true,
+            Sources = true
+        });
+    }
+
+    public static async Task StopTracing(IBrowserContext browserContext, string testName)
+    {
+        try
+        {
+            await browserContext.Tracing.StopAsync(new()
+            {
+                Path = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestOutput/playwright-traces", $"{testName}.zip")
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("There was an error while stopping the tracing " + e.Message);
+        };
+    }
+
+
 }
