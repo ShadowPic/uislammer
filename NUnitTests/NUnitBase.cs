@@ -1,13 +1,15 @@
 ﻿
 
+using Allure.NUnit;
 using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
-using playwright.Pages;
+using playwrightSolution.Setup;
 
-namespace playwright.NUnitTests.Tests
+
+namespace playwrightSolution.NUnitTests.Tests
 {
     [Parallelizable(ParallelScope.Self)]
+    [AllureNUnit]
     public class NUnitBase
     {
         public IPage Page;

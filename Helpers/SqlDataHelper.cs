@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace playwright.Helpers
+namespace playwrightSolution.Helpers
 {
-    public class SqlDataHelper
+    public class SQLDataHelper
     {
 
         public static List<Dictionary<string, object>> ExecuteQuery(string query)

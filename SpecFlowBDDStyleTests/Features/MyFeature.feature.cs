@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace playwright.SpecFlowBDDStyleTests.Features
+namespace playwrightSolution.SpecFlowBDDStyleTests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -21,12 +21,16 @@ namespace playwright.SpecFlowBDDStyleTests.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Testing Playwright with SpecFlow")]
+    [NUnit.Framework.CategoryAttribute("allure.label.epic:AccountManagment")]
+    [NUnit.Framework.CategoryAttribute("allure.label.Feature:HomePage")]
     public partial class TestingPlaywrightWithSpecFlowFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "allure.label.epic:AccountManagment",
+                "allure.label.Feature:HomePage"};
         
 #line 1 "MyFeature.feature"
 #line hidden
@@ -75,12 +79,20 @@ namespace playwright.SpecFlowBDDStyleTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Demonstration of simple navigating to website and click case")]
+        [NUnit.Framework.CategoryAttribute("Rahul")]
+        [NUnit.Framework.CategoryAttribute("US_234561")]
+        [NUnit.Framework.CategoryAttribute("TC_234568")]
+        [NUnit.Framework.CategoryAttribute("allure.label.suite:Rahul")]
         public void DemonstrationOfSimpleNavigatingToWebsiteAndClickCase()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Rahul",
+                    "US_234561",
+                    "TC_234568",
+                    "allure.label.suite:Rahul"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Demonstration of simple navigating to website and click case", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 3
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -90,13 +102,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
+#line 8
   testRunner.Given("I navigate to the website", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 5
+#line 9
   testRunner.When("I click the \"Xbox\" link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 6
+#line 10
   testRunner.Then("I should see the title \"Xbox Official Site: Consoles, Games, and Community | Xbox" +
                         "\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -106,12 +118,20 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Demonstration of using POM with single and list of elements")]
+        [NUnit.Framework.CategoryAttribute("Monica")]
+        [NUnit.Framework.CategoryAttribute("US_234555")]
+        [NUnit.Framework.CategoryAttribute("TC_234977")]
+        [NUnit.Framework.CategoryAttribute("allure.label.suite:Monica")]
         public void DemonstrationOfUsingPOMWithSingleAndListOfElements()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Monica",
+                    "US_234555",
+                    "TC_234977",
+                    "allure.label.suite:Monica"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Demonstration of using POM with single and list of elements", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -121,16 +141,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
+#line 15
   testRunner.Given("I navigate to the website", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 10
+#line 16
   testRunner.When("I Get all the menu buttons from header and click a random button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 11
+#line 17
   testRunner.Then("I Navigate back to home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 12
+#line 18
   testRunner.And("I click on Microsoft logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

@@ -1,16 +1,16 @@
 ﻿using FluentAssertions;
 using Microsoft.Playwright;
-using playwright.Helpers;
-using playwrightBDD.Setup;
+using playwrightSolution.Helpers;
+using playwrightSolution.Setup;
 using TechTalk.SpecFlow;
 
-namespace playwrightBDD.StepDefinitions
+namespace playwrightSolution.StepDefinitions
 {
     [Binding]
     public class MyFeature 
     {
         //private readonly ScenarioContext _scenarioContext;
-        public IPage _Page = null!;
+        public IPage _Page ;
 
 
         // Use below when you want to interact with one element xpath

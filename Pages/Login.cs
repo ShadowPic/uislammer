@@ -1,13 +1,13 @@
 ﻿using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
-using playwright.Helpers;
+using playwrightSolution.Helpers;
+using static Microsoft.Playwright.Assertions;
 
 
-namespace playwright.Pages
+namespace playwrightSolution.Pages
 {
-    public class Login : PageTest
+    public class Login
     {
-        private new IPage Page;
+        private readonly IPage Page;
         public Login(IPage Page)
         {
             this.Page = Page;

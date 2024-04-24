@@ -1,10 +1,10 @@
 ﻿
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using playwrightBDD.Setup;
+using playwrightSolution.Constants;
 using System.Text.RegularExpressions;
 
-namespace playwright.Helpers
+namespace playwrightSolution.Helpers
 {
     public class CommonUtility
     {
