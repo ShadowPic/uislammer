@@ -1,24 +1,29 @@
 ﻿
 
+using Allure.NUnit;
 using Microsoft.Playwright;
 using NUnit.Framework;
+using playwrightSolution.Setup;
 
-namespace playwright.NUnitTests.Tests
+
+namespace playwrightSolution.NUnitTests.Tests
 {
-    internal class NUnitBase
+    [Parallelizable(ParallelScope.Self)]
+    [AllureNUnit]
+    public class NUnitBase
     {
-        public IPage PlaywrightPage = null!;
+        public IPage Page;
 
         [SetUp]
         public async Task BeforeTest()
         {
-            PlaywrightPage = await PlaywrightBase.InitializePlaywright();
+            Page = await PlaywrightBase.InitializePlaywright();
         }
 
         [TearDown]
         public async Task AfterTest()
         {
-            await PlaywrightBase.CleanupPlaywright(PlaywrightPage);
+            await PlaywrightBase.CleanupPlaywright(Page);
         }
 
 

@@ -6,4 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1050:Declare types in namespaces", Justification = "<Pending>", Scope = "type", Target = "~T:PlaywrightBase")]
-[assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "member", Target = "~M:playwrightBDD.Setup.CommonUtility.GetAValueFromAppSettings(System.String)~System.String")]
+[assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "member", Target = "~M:playwrightSolution.Setup.CommonUtility.GetAValueFromAppSettings(System.String)~System.String")]

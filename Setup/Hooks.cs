@@ -1,10 +1,11 @@
 ﻿using Microsoft.Playwright;
 using NUnit.Framework;
+using playwrightSolution.Constants;
 using TechTalk.SpecFlow;
 
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 
-namespace playwrightBDD.Setup
+namespace playwrightSolution.Setup
 {
     [Binding]
     public class Hooks 

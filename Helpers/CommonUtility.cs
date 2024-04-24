@@ -1,9 +1,10 @@
 ﻿
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using playwrightSolution.Constants;
 using System.Text.RegularExpressions;
 
-namespace playwrightBDD.Setup
+namespace playwrightSolution.Helpers
 {
     public class CommonUtility
     {
@@ -14,7 +15,7 @@ namespace playwrightBDD.Setup
         {
             if (string.IsNullOrEmpty(Configuration[key]))
             {
-                throw new System.ArgumentException($"the key is not found in configuration please check the appsettings.json or appsettings.{Config.ENVIRONMENT}.json file for ", key);
+                throw new ArgumentException($"the key is not found in configuration please check the appsettings.json or appsettings.{Config.ENVIRONMENT}.json file for ", key);
             }
             return Configuration[key]!;
         }
@@ -69,7 +70,7 @@ namespace playwrightBDD.Setup
         {
             plainText = ":" + plainText;
             byte[] plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            string encodedText = System.Convert.ToBase64String(plainTextBytes);
+            string encodedText = Convert.ToBase64String(plainTextBytes);
             return encodedText;
         }
 
@@ -80,7 +81,7 @@ namespace playwrightBDD.Setup
             string pattern = "[^a-zA-Z0-9]";
 
             // Create a Regex object
-            Regex regex = new (pattern);
+            Regex regex = new(pattern);
 
             // Use the Regex.Replace method to remove special characters
             string result = regex.Replace(inputStringWithSpecialChar, "");

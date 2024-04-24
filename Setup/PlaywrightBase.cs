@@ -1,43 +1,72 @@
 ﻿using Microsoft.Playwright;
-using playwrightBDD.Setup;
+using NUnit.Framework;
+using playwrightSolution.Constants;
 
-
-public class PlaywrightBase
+namespace playwrightSolution.Setup
 {
-    public IBrowser browser = null!;
-    public IBrowserContext browserContext = null!;
-    public IPage PlaywrightPage = null!;
-
-    public static async Task<IPage> InitializePlaywright()
+    public class PlaywrightBase
     {
-        var playwright = await Playwright.CreateAsync();
-        var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+
+        public static async Task<IPage> InitializePlaywright()
         {
-            Headless = false
-        });
-        var context = await browser.NewContextAsync(new()
+            var playwright = await Playwright.CreateAsync();
+            var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            {
+                Headless = false
+            });
+            var context = await browser.NewContextAsync(new()
+            {
+
+            });
+
+            return await context.NewPageAsync();
+
+
+        }
+
+        public static async Task CleanupPlaywright(IPage PlaywrightPage)
         {
-
-        });
-
-        return await context.NewPageAsync();
+            await PlaywrightPage.CloseAsync();
+        }
 
 
-    }
-
-    public static async Task CleanupPlaywright(IPage PlaywrightPage)
-    {
-        await PlaywrightPage.CloseAsync();
-    }
-
-    public static async Task TakeScreenShot(IPage PlaywrightPage,string title)
-    {
-        string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss");
-
-        await PlaywrightPage.ScreenshotAsync(new()
+        public static async Task TakeScreenShot(IPage PlaywrightPage, string title)
         {
-            Path = $"TestOutput_{Config.ENVIRONMENT}_env/Screenshots/" + "_" + title + "_" + currentDateTime + ".jpg",
-            FullPage = true,
-        });
+            string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss");
+
+            await PlaywrightPage.ScreenshotAsync(new()
+            {
+                Path = $"TestOutput_{Config.ENVIRONMENT}_env/Screenshots/" + "_" + title + "_" + currentDateTime + ".jpg",
+                FullPage = true,
+            });
+        }
+
+        public static async Task StartTracing(IBrowserContext browserContext, string testName)
+        {
+            await browserContext.Tracing.StartAsync(new()
+            {
+                Title = testName,
+                Screenshots = true,
+                Snapshots = true,
+                Sources = true
+            });
+        }
+
+        public static async Task StopTracing(IBrowserContext browserContext, string testName)
+        {
+            try
+            {
+                await browserContext.Tracing.StopAsync(new()
+                {
+                    Path = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestOutput/playwright-traces", $"{testName}.zip")
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("There was an error while stopping the tracing " + e.Message);
+            }
+        }
+
+
     }
 }
